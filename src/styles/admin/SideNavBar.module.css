@@ -1,0 +1,35 @@
+.sidenav {
+  position: fixed;
+  top: 110px; /* Adjust this value to position it below the TopNavBar */
+  left: 20px;
+  width: 60px;
+  background-color: #fff;
+  box-shadow: 0 8px 28px rgba(72, 89, 102, 0.1);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 14px 0;
+  gap: 30px;
+  z-index: 900;
+}
+
+.dashboardIcon,
+.attendanceOverviewIcon {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.dashboardIcon:hover,
+.attendanceOverviewIcon:hover {
+  transform: scale(1.1);
+}
+
+/* Remove the blue indicator */
+.sidenavChild,
+.sidenavItem {
+  display: none;
+}

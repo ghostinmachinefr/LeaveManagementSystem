@@ -1,0 +1,118 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500&display=swap");
+
+.screen1Adp {
+    min-width: 1024px;
+    min-height: 100vh;
+    padding-top: 90px;
+    background-color: #F0F3F6;
+    font-family: "Lexend", sans-serif;
+}
+
+.mainContent {
+    padding: 24px 24px 24px 104px;
+}
+
+.tableContainer {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 28px rgba(72, 89, 102, 0.1);
+    padding: 24px;
+    overflow-x: auto;
+}
+
+.title {
+    font-size: 20px; 
+    color: #252C58; 
+    margin-bottom: 16px; 
+    font-family: "Lexend", sans-serif;
+    font-weight: 500;
+}
+
+.searchSection {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+    justify-content: flex-end;
+}
+
+.searchLabel {
+    font-size: 16px;
+    color: #252C58; 
+    font-family: "Lexend", sans-serif;
+}
+
+.searchButtons {
+    display: flex;
+    gap: 12px;
+}
+
+.searchButton {
+    padding: 8px 16px;
+    border: 1px solid #318BE5;
+    border-radius: 8px;
+    background-color: #EEEDFC;
+    color: #727272;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: "Lexend", sans-serif;
+}
+
+.searchButton:hover {
+    background-color: #e6e5f8;
+}
+
+.overviewTable {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 24px;
+}
+
+.overviewTable th,
+.overviewTable td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+    font-family: "Lexend", sans-serif;
+    color: #252C58;
+}
+
+.overviewTable th {
+    font-weight: 500;
+    background-color: #f8f9fa;
+    color: #252C58; 
+}
+
+.overviewTable tr:last-child td {
+    border-bottom: none;
+}
+
+.overviewTable tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.exportButton {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 16px; /* Smaller padding */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: "Lexend", sans-serif;
+    font-size: 14px;
+    transition: background-color 0.2s;
+  }
+  
+  .exportButton:hover {
+    background-color: #0056b3;
+  }
+  
+  .headerSection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }

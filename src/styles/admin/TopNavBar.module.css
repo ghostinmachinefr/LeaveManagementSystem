@@ -1,0 +1,67 @@
+.navbar {
+  position: fixed;
+  top: 20px; 
+  left: 20px; 
+  right: 20px; 
+  height: 70px;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  background-color: white;
+  box-shadow: 0 8px 28px rgba(72, 89, 102, 0.1); 
+  border-radius: 15px; 
+  z-index: 1000;
+}
+
+.hclLogo {
+  height: 51px;
+  width: auto;
+}
+
+.navback {
+  flex: 1;
+}
+
+.navsep {
+  margin: 0 16px;
+}
+
+.admindetails {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  order: 1; /* Ensures this appears last */
+}
+
+.admindetails:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+}
+
+.profileImage {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.adminAdmindomainin {
+  text-align: left;
+}
+
+.p {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.p:first-child {
+  font-weight: 500;
+}
+
+.p:last-child {
+  font-size: 0.9em;
+  color: #666;
+}
