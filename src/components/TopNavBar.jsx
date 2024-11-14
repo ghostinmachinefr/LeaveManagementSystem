@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import styles from '../../styles/TopNavBar.module.css';
+import styles from '../styles/TopNavBar.module.css';
 
 const TopNavBar = ({ user }) => {
   return (

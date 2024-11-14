@@ -4,6 +4,7 @@
   left: 20px; 
   right: 20px; 
   height: 70px;
+  min-width: 984px;
   display: flex;
   align-items: center;
   padding: 0 24px;
@@ -11,6 +12,13 @@
   box-shadow: 0 8px 28px rgba(72, 89, 102, 0.1); 
   border-radius: 15px; 
   z-index: 1000;
+}
+
+/* Adding media query for larger screens */
+@media screen and (min-width: 1440px) {
+  .admindetails {
+    padding: 8px 24px; /* Slightly more padding on larger screens */
+  }
 }
 
 .hclLogo {

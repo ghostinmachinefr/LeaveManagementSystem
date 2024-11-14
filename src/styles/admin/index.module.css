@@ -8,6 +8,7 @@ body {
 }
 
 .screen2Adp {
+  min-width: 1024px;
   min-height: 100vh;
   padding-top: 90px;
 }
@@ -21,6 +22,9 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 24px;
   margin-bottom: 24px;
+  max-width: 1800px; /* Prevent cards from stretching too wide */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .viewAttendanceButton {
