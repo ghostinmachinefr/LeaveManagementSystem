@@ -1,0 +1,61 @@
+.card {
+    background: white;
+    padding: 24px 24px 24px 24px;  /* Adjusted padding */
+    border-radius: 12px;
+    box-shadow: 0 8px 28px rgba(72, 89, 102, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;  /* This controls space between title and stats */
+}
+
+.cardTitle {
+    margin: 0;  /* Removed margin, using gap instead */
+    font-size: 24px;
+    color: #333;
+    font-weight: 500;
+    padding-left: 132px;
+}
+
+.cardStats {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 32px;
+}
+
+.leaveStats {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex-grow: 1;
+}
+
+.statItem {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 12px;
+}
+
+.statLabel {
+    color: #666;
+    font-size: 14px;  /* Increased from 10px */
+    min-width: 60px;
+}
+
+.statValue {
+    font-weight: 500;
+    color: #333;
+    font-size: 14px;  /* Increased from 10px */
+}
+
+.progressCircle {
+    position: relative;
+    min-width: 100px;
+}
+
+.progressText {
+    font-size: 16px;
+    fill: #333;
+    font-weight: 500;
+}

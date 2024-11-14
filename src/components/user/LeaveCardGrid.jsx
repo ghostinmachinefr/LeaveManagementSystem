@@ -1,4 +1,4 @@
-import styles from './LeaveCardsGrid.module.css';
+import styles from '@/styles/user/LeaveCardGrid.module.css'; 
 import LeaveCard from './LeaveCard';
 
 const LeaveCardsGrid = ({ leaveStats }) => {

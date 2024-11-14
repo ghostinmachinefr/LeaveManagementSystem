@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import TopNavBar from '../../src/components/TopNavBar';
-import SideNavBar from '../../src/components/user/SideNavBar';
-import LeaveCardsGrid from '../../src/components/user/Cards/LeaveCardsGrid';
-import LeaveRequestsTable from '../../src/components/user/LeaveRequestsTable';
-import styles from './userpage.module.css';
+import TopNavBar from '@/components/TopNavBar';
+import SideNavBar from '@/components/user/SideNavBar';
+import LeaveCardsGrid from '@/components/user/LeaveCardGrid';
+import LeaveRequestsTable from '@/components/user/LeaveRequestsTable';
+import styles from '@/styles/user/userpage.module.css';
 
 const UserDashboard = () => {
   const [user] = useState({
@@ -82,3 +82,4 @@ const UserDashboard = () => {
 };
 
 export default UserDashboard;
+

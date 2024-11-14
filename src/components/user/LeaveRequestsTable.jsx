@@ -1,4 +1,5 @@
-import styles from './LeaveRequestsTable.module.css';
+import styles from '@/styles/user/LeaveRequestsTable.module.css'; 
+import Image from 'next/image';
 
 const LeaveRequestsTable = ({ requests, onDeleteRequest }) => {
   return (
@@ -26,12 +27,7 @@ const LeaveRequestsTable = ({ requests, onDeleteRequest }) => {
                   className={styles.deleteButton}
                   onClick={() => onDeleteRequest(request.id)}
                 >
-                  <Image
-                    src="/delete-icon.svg"
-                    alt="Delete"
-                    width={20}
-                    height={20}
-                  />
+                  Delete
                 </button>
               </td>
             </tr>

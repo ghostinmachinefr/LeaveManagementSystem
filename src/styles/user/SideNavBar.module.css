@@ -1,0 +1,19 @@
+.sidenav {
+    position: fixed;
+    top: 130px; /* Increased from 110px */
+    left: 20px;
+    width: 60px;
+    background-color: #fff;
+    box-shadow: 0 8px 28px rgba(72, 89, 102, 0.1);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 14px 0;
+    z-index: 900;
+  }
+  
+  .dashboardIcon {
+    width: 24px;
+    height: 24px;
+  }
