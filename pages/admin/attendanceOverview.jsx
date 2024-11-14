@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
 import styles from '../../src/styles/admin/overview.module.css'; 
-import TopNavBar from '../../src/components/admin/TopNavBar'; 
+import TopNavBar from '../../src/components/TopNavBar'; 
 import SideNavBar from '../../src/components/admin/SideNavBar'; 
 import { useRouter } from 'next/router';
 
