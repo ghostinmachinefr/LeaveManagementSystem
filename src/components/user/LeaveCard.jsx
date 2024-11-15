@@ -1,12 +1,10 @@
 import styles from '@/styles/user/LeaveCard.module.css';
 
-const LeaveCard = ({ title, remainingLeaves, usedLeaves, totalLeaves }) => {
+const LeaveCard = ({ title, remainingLeaves, usedLeaves, totalLeaves, iconSrc, altText }) => {
   const percentage = (usedLeaves / totalLeaves) * 100;
-  
   return (
     <div className={styles.card}>
       <h3 className={styles.cardTitle}>{title}</h3>
-      
       <div className={styles.cardStats}>
         <div className={styles.progressCircle}>
           <svg width="100" height="100" viewBox="0 0 100 100">

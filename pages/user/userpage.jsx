@@ -9,7 +9,18 @@ const UserDashboard = () => {
   const [user] = useState({
     name: "User",
     email: "user@domain.com",
-    profilePicture: "/user-profile.png"
+    profilePicture: "/profile.png"
+  });
+
+  const [showDeletePopup, setShowDeletePopup] = useState(false);
+  const [deleteRequestId, setDeleteRequestId] = useState(null);
+  const [showLeavePopup, setShowLeavePopup] = useState(false);
+  
+  const [leaveRequest, setLeaveRequest] = useState({
+    type: 'Full Day',
+    startDate: '',
+    endDate: '',
+    reason: ''
   });
 
   const [leaveStats] = useState({
@@ -36,7 +47,6 @@ const UserDashboard = () => {
   });
 
   const [leaveRequests] = useState([
-    // Sample data
     {
       id: 'REQ001',
       dateSent: '2024-03-15',
@@ -46,12 +56,39 @@ const UserDashboard = () => {
     }
   ]);
 
-  const handleRequestLeave = () => {
-    // Handle leave request
+  const handleDeleteClick = (requestId) => {
+    setDeleteRequestId(requestId);
+    setShowDeletePopup(true);
   };
 
-  const handleDeleteRequest = (requestId) => {
-    // Handle delete request
+  const handleConfirmDelete = () => {
+    console.log('Deleting request:', deleteRequestId);
+    setShowDeletePopup(false);
+    setDeleteRequestId(null);
+  };
+
+  const handleCancelDelete = () => {
+    setShowDeletePopup(false);
+    setDeleteRequestId(null);
+  };
+
+  const handleRequestLeave = () => {
+    setShowLeavePopup(true);
+  };
+
+  const handleClosePopup = () => {
+    setShowLeavePopup(false);
+    setLeaveRequest({
+      type: 'Full Day',
+      startDate: '',
+      endDate: '',
+      reason: ''
+    });
+  };
+
+  const handleSubmitLeave = () => {
+    console.log('Leave Request:', leaveRequest);
+    handleClosePopup();
   };
 
   return (
@@ -73,8 +110,80 @@ const UserDashboard = () => {
           
           <LeaveRequestsTable 
             requests={leaveRequests}
-            onDeleteRequest={handleDeleteRequest}
+            onDeleteRequest={handleDeleteClick}
           />
+
+          {showDeletePopup && (
+            <div className={styles.overlay}>
+              <div className={`${styles.popup} ${styles.deletePopup}`}>
+                <h2>Are you sure?</h2>
+                <button className={styles.closeButton} onClick={handleCancelDelete}>×</button>
+                
+                <div className={styles.deleteActions}>
+                  <button 
+                    className={`${styles.actionButton} ${styles.noButton}`} 
+                    onClick={handleCancelDelete}
+                  >
+                    No
+                  </button>
+                  <button 
+                    className={`${styles.actionButton} ${styles.yesButton}`} 
+                    onClick={handleConfirmDelete}
+                  >
+                    Yes
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {showLeavePopup && (
+            <div className={styles.overlay}>
+              <div className={styles.popup}>
+                <h2>Request for Leave</h2>
+                <button className={styles.closeButton} onClick={handleClosePopup}>×</button>
+                
+                <h3>Type</h3>
+                <select 
+                  value={leaveRequest.type}
+                  onChange={(e) => setLeaveRequest({...leaveRequest, type: e.target.value})}
+                >
+                  <option value="Half Day">Half Day</option>
+                  <option value="Full Day">Full Day</option>
+                  <option value="Compensatory Off">Compensatory Off</option>
+                  <option value="Restricted Holiday">Restricted Holiday</option>
+                </select>
+
+                <div className={styles.dateSection}>
+                  <h3>Start Date</h3>
+                  <input 
+                    type="date"
+                    value={leaveRequest.startDate}
+                    onChange={(e) => setLeaveRequest({...leaveRequest, startDate: e.target.value})}
+                  />
+
+                  <h3>End Date</h3>
+                  <input 
+                    type="date"
+                    value={leaveRequest.endDate}
+                    onChange={(e) => setLeaveRequest({...leaveRequest, endDate: e.target.value})}
+                  />
+                </div>
+
+                <h3>Reason</h3>
+                <input 
+                  type="text"
+                  value={leaveRequest.reason}
+                  onChange={(e) => setLeaveRequest({...leaveRequest, reason: e.target.value})}
+                  placeholder="Enter your reason for leave"
+                />
+
+                <button className={styles.doneButton} onClick={handleSubmitLeave}>
+                  Done
+                </button>
+              </div>
+            </div>
+          )}
         </main>
       </div>
     </div>
@@ -82,4 +191,3 @@ const UserDashboard = () => {
 };
 
 export default UserDashboard;
-

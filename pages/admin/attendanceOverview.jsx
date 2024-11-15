@@ -8,7 +8,7 @@ const SCREEN1ADP = () => {
   const [user, setUser] = useState({
     name: "Admin",
     email: "admin@domain.com",
-    profilePicture: "/admin-profile.png"
+    profilePicture: "/profile.png"
   });
 
   const router = useRouter(); 

@@ -28,7 +28,7 @@ const SCREEN2ADP = () => {
   const [user, setUser] = useState({
     name: "Admin", // Default value for testing
     email: "admin@domain.com", // Default value for testing
-    profilePicture: "/admin-profile.png" // Default value for testing
+    profilePicture: "/profile.png" // Default value for testing
   });
 
   const [leaveData, setLeaveData] = useState({
