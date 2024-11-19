@@ -13,7 +13,7 @@ const LeaveCard = ({ title, remainingLeaves, usedLeaves, totalLeaves, iconSrc, a
               cy="50"
               r="40"
               fill="none"
-              stroke="#e6e6e6"
+              stroke="#E8EDFF"
               strokeWidth="8"
             />
             <circle
@@ -38,21 +38,21 @@ const LeaveCard = ({ title, remainingLeaves, usedLeaves, totalLeaves, iconSrc, a
             </text>
           </svg>
         </div>
-
         <div className={styles.leaveStats}>
           <div className={styles.statItem}>
             <span className={styles.statLabel}>Remaining</span>
-            <span className={styles.statValue}>{remainingLeaves}</span>
+            <span className={`${styles.statValue} ${styles.remainingValue}`}>{remainingLeaves}</span>
           </div>
           <div className={styles.statItem}>
             <span className={styles.statLabel}>Used</span>
-            <span className={styles.statValue}>{usedLeaves}</span>
+            <span className={`${styles.statValue} ${styles.usedValue}`}>{usedLeaves}</span>
           </div>
           <div className={styles.statItem}>
             <span className={styles.statLabel}>Total</span>
-            <span className={styles.statValue}>{totalLeaves}</span>
+            <span className={`${styles.statValue} ${styles.totalValue}`}>{totalLeaves}</span>
           </div>
         </div>
+        
       </div>
     </div>
   );

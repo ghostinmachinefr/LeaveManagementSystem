@@ -11,7 +11,7 @@ const LeaveRequestsTable = ({ requests, onDeleteRequest }) => {
             <th>Request ID</th>
             <th>Date Sent</th>
             <th>Type</th>
-            <th>From - To</th>
+            <th>From-To</th>
             <th></th>
           </tr>
         </thead>
