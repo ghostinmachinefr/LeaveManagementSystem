@@ -47,21 +47,6 @@
     gap: 12px;
 }
 
-.searchButton {
-    padding: 8px 16px;
-    border: 1px solid #318BE5;
-    border-radius: 8px;
-    background-color: #EEEDFC;
-    color: #727272;
-    cursor: pointer;
-    transition: all 0.2s;
-    font-family: "Lexend", sans-serif;
-}
-
-.searchButton:hover {
-    background-color: #e6e5f8;
-}
-
 .overviewTable {
     width: 100%;
     border-collapse: separate;
@@ -92,7 +77,7 @@
     background-color: #f8f9fa;
 }
 
-.exportButton {
+.exportButton, .searchButton {
     display: inline-flex;
     align-items: center;
     padding: 8px 16px; /* Smaller padding */
@@ -103,8 +88,19 @@
     cursor: pointer;
     font-family: "Lexend", sans-serif;
     font-size: 14px;
+  }
+
+.exportButton{
     transition: background-color 0.2s;
   }
+
+.searchButton {
+    transition: all 0.2s;
+}
+
+.searchButton:hover {
+    background-color: #0056b3;
+}
   
   .exportButton:hover {
     background-color: #0056b3;

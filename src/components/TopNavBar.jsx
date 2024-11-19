@@ -1,14 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import Image from 'next/image';
 import styles from '../styles/TopNavBar.module.css';
+import { useRouter } from 'next/router';
 
 const TopNavBar = ({ user }) => {
   const [showDropdown, setShowDropdown] = useState(false);
+  const router = useRouter(); // Moved this line up
 
   const handleSignOut = () => {
     // Add your sign out logic here
     console.log('Signing out...');
   };
+
+  const handleHclLogoClick = useCallback(() => {
+      router.push('/admin/adminpage');
+    }, [router]);
+  
 
   return (
     <header className={styles.navbar} id="TopNavBar">
@@ -18,7 +25,10 @@ const TopNavBar = ({ user }) => {
         height={51}
         alt="HCL Logo"
         src="/hcl-logo.png"
+        onClick={handleHclLogoClick}
+        style={{ cursor: 'pointer' }}
       />
+        
       <div className={styles.navback} />
       <Image
         className={styles.navsep}

@@ -13,6 +13,7 @@ const SideNavBar = ({ onDashboardIconClick, onAttendanceOverviewIconClick, activ
         src={activePage === 'dashboard' ? "/dashboard-icon-active.svg" : "/dashboard-icon.svg"}
         onClick={onDashboardIconClick}
         style={{ cursor: 'pointer' }}
+        title="Go to Dashboard"
       />
       <Image
         className={styles.attendanceOverviewIcon}
@@ -22,6 +23,7 @@ const SideNavBar = ({ onDashboardIconClick, onAttendanceOverviewIconClick, activ
         src={activePage === 'attendanceOverview' ? "/attendance-overview-icon-active.svg" : "/attendance-overview-icon.svg"}
         onClick={onAttendanceOverviewIconClick}
         style={{ cursor: 'pointer' }}
+        title="Go to Attendance Overview"
       />
     </aside>
   );
