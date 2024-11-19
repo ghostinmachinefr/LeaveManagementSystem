@@ -1,6 +1,6 @@
 Structure of the project:
 
-leave-management-system
+Leave-management-system
 ├─ .eslintrc.json
 ├─ .git
 │  ├─ COMMIT_EDITMSG
