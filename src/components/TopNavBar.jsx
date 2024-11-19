@@ -11,10 +11,14 @@ const TopNavBar = ({ user }) => {
     // Add your sign out logic here
     console.log('Signing out...');
   };
-
   const handleHclLogoClick = useCallback(() => {
+    // Check if the current path includes '/admin'
+    if (router.pathname.includes('/admin')) {
       router.push('/admin/adminpage');
-    }, [router]);
+    } else if (router.pathname.includes('/user')) {
+      router.push('/user/userpage');
+    }
+  }, [router]);
   
 
   return (
