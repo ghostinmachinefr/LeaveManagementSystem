@@ -25,9 +25,10 @@ export default function LoginForm() {
             <div className={styles.logo}>
               HCLTech
               <span className={styles.divider}>|</span>
-            </div>
-            <div className={styles.tagline}>
-              Supercharging Progress
+              <div className={styles.taglineContainer}>
+                <div className={styles.taglineTop}>Supercharging</div>
+                <div className={styles.taglineBottom}>Progress™</div>
+              </div>
             </div>
           </div>
         </div>

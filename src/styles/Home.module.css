@@ -25,38 +25,64 @@
   .logoContainer {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0;
   }
   
   .logoText {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    gap: 0;
   }
   
   .logo {
-    font-size: 5rem;
-    font-weight: bold;
-    color: white;
+    font-size: 6rem;  /* Increased size to match original */
+    font-weight: bold;  /* Lighter weight to match the silvery look */
+    color: #E5E5E5;  /* More silvery white color */
     display: flex;
     align-items: center;
-  }
-  
-  @media (min-width: 768px) {
-    .logo {
-      font-size: 5rem;
-    }
+    letter-spacing: -2px;  /* Tighter spacing */
   }
   
   .divider {
-    font-weight: 100;
+    color: #E5E5E5;
+    font-weight: 200;
+    font-size: 5rem;
     margin: 0 0.5rem;
+    line-height: 0.9;
+  }
+  .taglineContainer {
+    display: flex;
+    flex-direction: column;
+    margin-left: 0.5rem;
+    justify-content: center;
+  }
+  
+  .taglineTop {
+    font-size: 1rem;
+    color: #E5E5E5;
+    line-height: 1.2;
+    font-weight: 200;
+    letter-spacing: normal;
+    margin-bottom: 0.2rem;
+  }
+  
+  .taglineBottom {
+    font-size: 1rem;
+    color: #E5E5E5;
+    line-height: 1.2;
+    font-weight: 200;
+    letter-spacing: normal;
   }
   
   .tagline {
-    font-size: 1.125rem;
-    color: white;
-    line-height: 1.25;
+    font-size: 1.25rem;  /* Increased size */
+    color: #E5E5E5;
+    line-height: 1;
+    font-weight: 200;  /* Lighter weight */
+    letter-spacing: normal;
+    margin-left: 0rem;
+    margin-top: 1rem;  /* Align with the middle of the logo */
   }
   
   .loginBox {
