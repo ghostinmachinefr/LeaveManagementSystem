@@ -47,20 +47,23 @@ export default function LoginForm() {
                 required
               />
             </div>
-            <div className={styles.formGroup}>
-              <label htmlFor="password" className={styles.label}>
-                Password
-              </label>
-              <input
-                type="password"
-                id="password"
-                className={styles.input}
-                placeholder="Enter your password"
-                required
-              />
-            </div>
+             {/* Only show password field for admin */}
+             {type === 'admin' && (
+              <div className={styles.formGroup}>
+                <label htmlFor="password" className={styles.label}>
+                  Password
+                </label>
+                <input
+                  type="password"
+                  id="password"
+                  className={styles.input}
+                  placeholder="Enter your password"
+                  required
+                />
+              </div>
+            )}
             <button type="submit" className={styles.button}>
-              Sign In
+              {type === 'admin' ? 'Sign In' : 'Continue'}
             </button>
           </form>
         </div>
@@ -69,3 +72,4 @@ export default function LoginForm() {
     </div>
   );
 }
+            
