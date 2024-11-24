@@ -5,21 +5,20 @@ import { useRouter } from 'next/router';
 
 const TopNavBar = ({ user }) => {
   const [showDropdown, setShowDropdown] = useState(false);
-  const router = useRouter(); // Moved this line up
+  const router = useRouter();
 
   const handleSignOut = () => {
-    // Add your sign out logic here
-    console.log('Signing out...');
+    setShowDropdown(false); // Close dropdown
+    router.push('/login'); // Redirect to main login page
   };
+
   const handleHclLogoClick = useCallback(() => {
-    // Check if the current path includes '/admin'
     if (router.pathname.includes('/admin')) {
       router.push('/admin/adminpage');
     } else if (router.pathname.includes('/user')) {
       router.push('/user/userpage');
     }
   }, [router]);
-  
 
   return (
     <header className={styles.navbar} id="TopNavBar">

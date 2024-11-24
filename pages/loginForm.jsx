@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import styles from '@/styles/Home.module.css';
 import { useRouter, useSearchParams } from 'next/navigation';
 
@@ -7,9 +7,31 @@ export default function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const type = searchParams.get('type');
+  
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
+
+  const isFormValid = () => {
+    if (type === 'admin') {
+      return formData.email.trim() !== '' && formData.password.trim() !== '';
+    }
+    return formData.email.trim() !== ''; // For user, only SAP ID is required
+  };
+
+  const handleInputChange = (e) => {
+    const { id, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [id]: value
+    }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!isFormValid()) return;
+    
     if (type === 'admin') {
       router.push('/admin/adminpage');
     } else {
@@ -45,10 +67,13 @@ export default function LoginForm() {
                 className={styles.input}
                 placeholder={type === 'admin' ? 'Enter your email' : 'Enter your SAP ID'}
                 required
+                value={formData.email}
+                onChange={handleInputChange}
+                autoComplete="off"
               />
             </div>
-             {/* Only show password field for admin */}
-             {type === 'admin' && (
+            
+            {type === 'admin' && (
               <div className={styles.formGroup}>
                 <label htmlFor="password" className={styles.label}>
                   Password
@@ -59,10 +84,18 @@ export default function LoginForm() {
                   className={styles.input}
                   placeholder="Enter your password"
                   required
+                  value={formData.password}
+                  onChange={handleInputChange}
+                  autoComplete="off"
                 />
               </div>
             )}
-            <button type="submit" className={styles.button}>
+
+            <button 
+              type="submit" 
+              className={styles.button}
+              disabled={!isFormValid()}
+            >
               {type === 'admin' ? 'Sign In' : 'Continue'}
             </button>
           </form>
@@ -72,4 +105,3 @@ export default function LoginForm() {
     </div>
   );
 }
-            

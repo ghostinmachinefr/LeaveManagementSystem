@@ -9,7 +9,7 @@
 
 .mainContainer {
   display: flex;
-  padding-top: 73px; /* Space for TopNavBar */
+  padding-top: 90px; /* Space for TopNavBar */
 }
 
 .mainContent {
@@ -20,7 +20,7 @@
 .topSection {
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
 
 .requestLeaveButton {
