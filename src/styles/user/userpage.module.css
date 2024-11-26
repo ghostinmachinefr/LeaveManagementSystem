@@ -287,3 +287,29 @@
 .popup input:last-of-type {
     margin-bottom: 48px;
 }
+/* Add these new styles for the done button */
+.doneButton {
+  position: absolute;
+  right: 32px;
+  bottom: 20px;
+  padding: 8px 28px;
+  background-color: #3354F4;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: "Lexend", sans-serif;
+  transition: all 0.3s ease;
+}
+
+.doneButton.disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.doneButton:not(.disabled):hover {
+  background-color: #2842c3;
+}
+
+/* Rest of your existing CSS remains the same */
