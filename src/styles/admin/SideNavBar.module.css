@@ -1,6 +1,6 @@
 .sidenav {
   position: fixed;
-  top: 110px; /* Adjust this value to position it below the TopNavBar */
+  top: 110px;
   left: 20px;
   width: 60px;
   background-color: #fff;
@@ -14,43 +14,43 @@
   z-index: 900;
 }
 
-.dashboardIcon,
-.attendanceOverviewIcon {
+.iconWrapper {
   position: relative;
-  width: 24px;
-  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
   transition: transform 0.2s;
 }
 
-.dashboardIcon:hover,
-.attendanceOverviewIcon:hover {
+.iconWrapper:hover {
   transform: scale(1.1);
+}
+
+.dashboardIcon,
+.historyIcon {
+  width: 24px;
+  height: 24px;
 }
 
 .tooltip {
   position: absolute;
-  z-index: 1;
-  bottom: 100%; 
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: rgba(0,0,0,0.7);
-  color: white;
-  text-align: center;
-  border-radius: 6px;
+  left: 100%;
+  margin-left: 10px;
   padding: 5px 10px;
-  margin-bottom: 5px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
   opacity: 0;
-  transition: opacity 0.01s ease; 
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
 }
 
-.dashboardIcon:hover .tooltip,
-.attendanceOverviewIcon:hover .tooltip {
-  opacity: 1; 
-}
-
-/* Remove the blue indicator */
-.sidenavChild,
-.sidenavItem {
-  display: none;
+.iconWrapper:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
 }

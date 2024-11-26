@@ -17,11 +17,20 @@ const UserDashboard = () => {
   const [showLeavePopup, setShowLeavePopup] = useState(false);
   
   const [leaveRequest, setLeaveRequest] = useState({
-    type: 'Full Day',
+    type: '',
     startDate: '',
     endDate: '',
     reason: ''
   });
+
+  const isFormValid = () => {
+    return (
+      leaveRequest.type !== '' &&
+      leaveRequest.startDate !== '' &&
+      leaveRequest.endDate !== '' &&
+      leaveRequest.reason.trim() !== ''
+    );
+  };
 
   const [leaveStats] = useState({
     fullLeave: {
@@ -79,7 +88,7 @@ const UserDashboard = () => {
   const handleClosePopup = () => {
     setShowLeavePopup(false);
     setLeaveRequest({
-      type: 'Full Day',
+      type: '',
       startDate: '',
       endDate: '',
       reason: ''
@@ -87,8 +96,10 @@ const UserDashboard = () => {
   };
 
   const handleSubmitLeave = () => {
-    console.log('Leave Request:', leaveRequest);
-    handleClosePopup();
+    if (isFormValid()) {
+      console.log('Leave Request:', leaveRequest);
+      handleClosePopup();
+    }
   };
 
   return (
@@ -147,7 +158,9 @@ const UserDashboard = () => {
                 <select 
                   value={leaveRequest.type}
                   onChange={(e) => setLeaveRequest({...leaveRequest, type: e.target.value})}
+                  required
                 >
+                  <option value="">Select Leave Type</option>
                   <option value="Half Day">Half Day</option>
                   <option value="Full Day">Full Day</option>
                   <option value="Compensatory Off">Compensatory Off</option>
@@ -160,6 +173,7 @@ const UserDashboard = () => {
                     type="date"
                     value={leaveRequest.startDate}
                     onChange={(e) => setLeaveRequest({...leaveRequest, startDate: e.target.value})}
+                    required
                   />
 
                   <h3>End Date</h3>
@@ -167,6 +181,7 @@ const UserDashboard = () => {
                     type="date"
                     value={leaveRequest.endDate}
                     onChange={(e) => setLeaveRequest({...leaveRequest, endDate: e.target.value})}
+                    required
                   />
                 </div>
 
@@ -176,9 +191,14 @@ const UserDashboard = () => {
                   value={leaveRequest.reason}
                   onChange={(e) => setLeaveRequest({...leaveRequest, reason: e.target.value})}
                   placeholder="Enter your reason for leave"
+                  required
                 />
 
-                <button className={styles.doneButton} onClick={handleSubmitLeave}>
+                <button 
+                  className={`${styles.doneButton} ${!isFormValid() ? styles.disabled : ''}`}
+                  onClick={handleSubmitLeave}
+                  disabled={!isFormValid()}
+                >
                   Done
                 </button>
               </div>
