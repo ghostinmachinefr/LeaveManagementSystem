@@ -10,12 +10,20 @@
   },
   "dependencies": {
     "bootstrap": "^5.3.3",
+    "cors": "^2.8.5",
+    "express": "^4.21.1",
     "next": "15.0.3",
     "react": "19.0.0-rc-66855b96-20241106",
-    "react-dom": "19.0.0-rc-66855b96-20241106"
+    "react-dom": "19.0.0-rc-66855b96-20241106",
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "eslint": "^8",
     "eslint-config-next": "15.0.3"
-  }
+  },
+  "description": "Structure of the project:",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
