@@ -2,26 +2,9 @@ import { useEffect, useState, useCallback } from 'react';
 import styles from '../../src/styles/admin/index.module.css'; 
 import TopNavBar from '../../src/components/TopNavBar'; 
 import SideNavBar from '../../src/components/admin/SideNavBar'; 
-import Image from 'next/image'; 
+import Card from '../../src/components/admin/Card';
 import { useRouter } from 'next/router';
 
-const Card = ({ title, count, iconSrc, altText }) => {
-  return (
-    <div className={styles.card}>
-      <div className={styles.cardContent}>
-        <p className={styles.cardCount}>{count}</p>
-        <h3 className={styles.cardTitle}>{title}</h3>
-      </div>
-      <Image 
-        src={iconSrc}
-        alt={altText}
-        width={28}
-        height={28}
-        className={styles.cardIcon}
-      />
-    </div>
-  );
-};
 
 const SCREEN2ADP = () => {
   const router = useRouter(); 

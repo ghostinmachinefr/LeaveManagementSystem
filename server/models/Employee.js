@@ -40,6 +40,5 @@ const EmployeeSchema = new mongoose.Schema({
     timestamps: true
   });
 
-EmployeeSchema.index({ SAPID: 1 });
 
-module.exports = mongoose.models.Employee || mongoose.model('Employee', EmployeeSchema);
+module.exports = mongoose.model('Employee', EmployeeSchema);

@@ -25,7 +25,8 @@ const LeaveRequestSchema = new mongoose.Schema({
   },
   SAPID: {
     type: String,
-    required: true
+    required: true,
+    ref: 'Employee'
   },
   reason: {
     type: String,
