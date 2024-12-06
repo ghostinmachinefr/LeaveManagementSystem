@@ -1,50 +1,87 @@
 import styles from '@/styles/user/LeaveRequestsTable.module.css'; 
-import Image from 'next/image';
 
 const LeaveRequestsTable = ({ requests, onDeleteRequest }) => {
   const sampleRequests = [
     {
       id: 'REQ001',
-      dateSent: '2024-03-15',
+      dateSent: '15 March 2024',
       type: 'Full Leave',
-      fromDate: '2024-03-20',
-      toDate: '2024-03-21'
+      fromDate: '20 March 2024',
+      toDate: '21 March 2024',
+      requestedOn: '10 March 2024'
     },
     {
       id: 'REQ002',
-      dateSent: '2024-03-10',
+      dateSent: '10 March 2024',
       type: 'Half Leave',
-      fromDate: '2024-03-18',
-      toDate: '2024-03-18'
+      fromDate: '18 March 2024',
+      toDate: '18 March 2024',
+      requestedOn: '15 March 2024'
     },
     {
       id: 'REQ003',
-      dateSent: '2024-03-05',
+      dateSent: '05 March 2024',
       type: 'RH',
-      fromDate: '2024-03-25',
-      toDate: '2024-03-25'
+      fromDate: '25 March 2024',
+      toDate: '25 March 2024',
+      requestedOn: '20 March 2024'
     },
     {
       id: 'REQ004',
-      dateSent: '2024-02-28',
+      dateSent: '28 February 2024',
       type: 'Comp Off',
-      fromDate: '2024-03-15',
-      toDate: '2024-03-15'
+      fromDate: '15 March 2024',
+      toDate: '15 March 2024',
+      requestedOn: '10 March 2024'
     },
     {
       id: 'REQ005',
-      dateSent: '2024-02-20',
+      dateSent: '20 February 2024',
       type: 'Full Leave',
-      fromDate: '2024-03-01',
-      toDate: '2024-03-02'
+      fromDate: '01 March 2024',
+      toDate: '02 March 2024',
+      requestedOn: '25 February 2024'
     },
     {
       id: 'REQ006',
-      dateSent: '2024-02-15',
+      dateSent: '15 February 2024',
       type: 'Half Leave',
-      fromDate: '2024-02-28',
-      toDate: '2024-02-28'
+      fromDate: '28 February 2024',
+      toDate: '28 February 2024',
+      requestedOn: '20 February 2024'
     },
+    {
+      id: 'REQ007',
+      dateSent: '10 January 2024',
+      type: 'Full Leave',
+      fromDate: '15 January 2024',
+      toDate: '20 January 2024',
+      requestedOn: '05 January 2024'
+    },
+    {
+      id: 'REQ008',
+      dateSent: '05 January 2024',
+      type: 'Comp Off',
+      fromDate: '10 January 2024',
+      toDate: '10 January 2024',
+      requestedOn: '01 January 2024'
+    },
+    {
+      id: 'REQ009',
+      dateSent: '20 December 2023',
+      type: 'Half Leave',
+      fromDate: '25 December 2023',
+      toDate: '25 December 2023',
+      requestedOn: '15 December 2023'
+    },
+    {
+      id: 'REQ010',
+      dateSent: '15 December 2023',
+      type: 'RH',
+      fromDate: '30 December 2023',
+      toDate: '30 December 2023',
+      requestedOn: '10 December 2023'
+    }
   ];
 
   return (
@@ -56,7 +93,9 @@ const LeaveRequestsTable = ({ requests, onDeleteRequest }) => {
             <th>Request ID</th>
             <th>Date Sent</th>
             <th>Type</th>
-            <th>From-To</th>
+            <th>Leave Request Date From</th>
+            <th>Leave Request Date To</th>
+            <th>Leave Requested On</th>
             <th></th>
           </tr>
         </thead>
@@ -66,13 +105,15 @@ const LeaveRequestsTable = ({ requests, onDeleteRequest }) => {
               <td>{request.id}</td>
               <td>{request.dateSent}</td>
               <td>{request.type}</td>
-              <td>{`${request.fromDate} → ${request.toDate}`}</td>
+              <td>{request.fromDate}</td>
+              <td>{request.toDate}</td>
+              <td>{request.requestedOn}</td>
               <td>
                 <button 
                   className={styles.deleteButton}
                   onClick={() => onDeleteRequest(request.id)}
                 >
-                  Delete
+                  Cancel
                 </button>
               </td>
             </tr>

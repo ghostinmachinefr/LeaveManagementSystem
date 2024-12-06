@@ -58,10 +58,10 @@ const UserDashboard = () => {
   const [leaveRequests] = useState([
     {
       id: 'REQ001',
-      dateSent: '2024-03-15',
+      dateSent: '15 March 2024',
       type: 'Full Leave',
-      fromDate: '2024-03-20',
-      toDate: '2024-03-21'
+      fromDate: '20 March 2024',
+      toDate: '21 March 2024'
     }
   ]);
 

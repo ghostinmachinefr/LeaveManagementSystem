@@ -22,24 +22,23 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    gap: 30px;
+    gap: 22px;
 }
 
 .leaveStats {
     display: flex;
     flex-direction: column;
     gap: 5px;
-    flex-grow: 1;
+    flex-grow: 0; /* Prevents the leaveStats from growing */
 }
 
 .statItem {
     display: grid;
-    grid-template-columns: 80px 40px; /* Fixed width columns for alignment */
+    grid-template-columns: 1fr 1fr; /* Use flexible columns for better fit */
     align-items: center;
-    gap: 1px;
+    gap: 5px; /* Adjusted gap for better spacing */
     margin-bottom: 1px;
     position: relative;
-
 }
 
 .statLabel {
@@ -54,13 +53,6 @@
 
 .statValue {
     color: #333;
-    font-size: 14px;
-    font-weight: 500;
-    font-family: "Lexend", sans-serif;
-    text-align: right;
-    min-width: 30px;
-}
-.statValue {
     font-size: 14px;
     font-weight: 500;
     font-family: "Lexend", sans-serif;
@@ -87,14 +79,28 @@
     justify-content: center;
     align-items: center;
 }
+.progressTextStatic {
+    position: absolute;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: "Lexend", sans-serif;
+    color: blue;
+    text-align: center;
+}
 
 .progressText {
     position: absolute;
     font-size: 16px;
     font-weight: 500;
     font-family: "Lexend", sans-serif;
-    color:blue;
+    color: blue;
     text-align: center;
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.3s ease; /* Smooth transition for visibility */
+}
+
+.progressCircle:hover .progressText {
+    opacity: 1; /* Show text on hover */
 }
 
 /* Progress circle styles */
@@ -111,8 +117,19 @@
 
 .circleProgress {
     fill: none;
-    stroke: #3354F4;
+    stroke: #3354F4; /* Set the stroke color */
     stroke-width: 8;
     stroke-linecap: round;
-    transition: stroke-dashoffset 0.5s ease;
+    transition: stroke-dashoffset 0.5s ease, stroke-width 0.5s ease; /* Added transition for stroke-width */
+    stroke-dasharray: 251.3274122871835; /* Ensure this matches the radius */
+    stroke-dashoffset: 251.3274122871835; /* Hide the progress initially */
+}
+
+.progressCircle:hover {
+    transform: scale(1.05); /* Slightly increase size on hover */
+}
+
+.progressCircle:hover .circleProgress {
+    stroke-dashoffset: calc(251.3274122871835 * (1 - var(--percentage) / 100)); /* Show the progress on hover */
+    stroke-width: 10; /* Optionally increase stroke width */
 }
