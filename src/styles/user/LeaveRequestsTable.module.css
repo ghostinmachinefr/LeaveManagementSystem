@@ -39,7 +39,9 @@
   .leaveTable tbody tr:hover {
     background-color: #f8f9fa;
   }
-  
+  .leaveTable tbody tr:hover {
+    background-color: white;
+}
   .deleteButton {
     padding: 8px 18px;
     background-color: #FFE5EE;
