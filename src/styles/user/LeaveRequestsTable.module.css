@@ -42,18 +42,19 @@
   .leaveTable tbody tr:hover {
     background-color: white;
 }
-  .deleteButton {
-    padding: 8px 18px;
-    background-color: #FFE5EE;
-    color: #AA0000;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-family: "Lexend", sans-serif;
-    font-size: 12px;
-    transition: opacity 0.2s;
-  }
-  
-  .deleteButton:hover {
-    opacity: 0.8;
-  }
+.deleteButton {
+  padding: 8px 18px;
+  background-color: #FFE5EE;
+  color: #AA0000;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: "Lexend", sans-serif;
+  font-size: 12px;
+  transition: all 0.2s ease;
+}
+
+.deleteButton:hover {
+  background-color: #ffccd5; /* Darker shade when hovered */
+  transform: scale(1.05); /* Slightly increase size */
+}

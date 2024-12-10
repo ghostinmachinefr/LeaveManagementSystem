@@ -1,5 +1,7 @@
+/* Font Import */
 @import url("https://fonts.googleapis.com/css2?family=Lexend:wght@300;400&display=swap");
 
+/* Main Layout Styles */
 .dashboard {
   min-width: 1024px;
   min-height: 100vh;
@@ -9,14 +11,15 @@
 
 .mainContainer {
   display: flex;
-  padding-top: 90px; /* Space for TopNavBar */
+  padding-top: 90px;
 }
 
 .mainContent {
   flex-grow: 1;
-  padding: 24px 24px 24px 104px; /* Right padding to account for sidenav */
+  padding: 24px 24px 24px 104px;
 }
 
+/* Top Section with Request Leave Button */
 .topSection {
   display: flex;
   justify-content: flex-end;
@@ -29,21 +32,22 @@
   padding: 12px 24px;
   background-color: #007bff;
   color: white;
-  border: 1px solid #3354F4;
+  border: 1px solid transparent;
   border-radius: 8px;
   cursor: pointer;
   font-family: "Lexend", sans-serif;
   font-size: 14px;
-  transition: background-color 0.2s;
+  transition: all 0.2s ease;
   box-shadow: 0 4px 6px rgba(0, 123, 255, 0.25);
 }
 
 .requestLeaveButton:hover {
   background-color: #0056b3;
+  border-color: #6aa5e4;
   box-shadow: 0 6px 8px rgba(0, 123, 255, 0.35);
 }
 
-/* Leave Cards Grid Styles */
+/* Leave Cards Grid Layout */
 .leaveCardsGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -66,7 +70,8 @@
   background-color: white;
   padding: 24px;
   border-radius: 12px;
-  box-shadow: 0 12px 32px rgba(72, 89, 102, 0.25);}
+  box-shadow: 0 12px 32px rgba(72, 89, 102, 0.25);
+}
 
 .table {
   width: 100%;
@@ -93,201 +98,233 @@
   border-bottom: none;
 }
 
-.table tbody tr:hover {
-  background-color: #f8f9fa;
-}
-
+/* Delete Button Styles */
 .deleteButton {
-  padding: 6px 12px;
-  background-color: #dc3545;
-  color: white;
+  padding: 8px 18px;
+  background-color: #FFE5EE;
+  color: #AA0000;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-family: "Lexend", sans-serif;
   font-size: 12px;
-  transition: background-color 0.2s;
+  transition: all 0.2s ease;
 }
 
 .deleteButton:hover {
-  background-color: #c82333;
+  background-color: #ffccd5;
+  transform: scale(1.05);
 }
-/* ... existing styles ... */
 
+/* Overlay and Popup Base Styles */
 .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(212, 219, 252, 0.5); 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(212, 219, 252, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
+/* Main Popup Styles */
 .popup {
-    background: white;
-    padding: 32px;
-    border-radius: 12px;
-    min-width: 400px;
-    position: relative;
-    min-height: 25px;
-    box-shadow: 0 8px 28px rgba(72, 89, 102, 0.1); 
+  background: white;
+  padding: 32px 32px 72px 32px;
+  border-radius: 12px;
+  min-width: 400px;
+  position: relative;
+  border: 1px solid transparent;
+  transition: border-color 0.3s ease;
+  box-shadow: 0 8px 28px rgba(72, 89, 102, 0.1);
 }
 
-.closeButton {
-    position: absolute;
-    right: 16px;
-    top: 16px;
-    background: none;
-    border: none;
-    font-size: 30px;
-    font-weight: 600;
-    color: #3354F4;
-    cursor: pointer;
-    padding: 4px;
+.popup:hover {
+  border-color: #6aa5e4;
 }
 
-.doneButton {
-    position: absolute;
-    right: 32px;
-    bottom: 20px;
-    padding: 8px 28px;
-    background-color: #3354F4;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-family: "Lexend", sans-serif;
-}
-
-/* Standardize all inputs and selects */
-/* Find and modify these styles */
-.popup input,
-.popup select,
-.popup textarea {
-    width: 100%;          /* Changed from calc(100% - 32px) */
-    padding: 12px 12px;
-    margin-bottom: 3px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    color: #727272;
-    font-family: "Lexend", sans-serif;
-    font-size: 14px;
-    box-sizing: border-box;  /* Added this to include padding in width calculation */
-}
-
-/* If you have any specific select styles, modify them to match */
-.popup select {
-    appearance: none;  /* Keeps this if you had it */
-    background: url("data:image/svg+xml,<svg height='10px' width='10px' viewBox='0 0 16 16' fill='%23727272' xmlns='http://www.w3.org/2000/svg'><path d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/></svg>") no-repeat;
-    background-position: calc(100% - 16px) center;
-    background-color: white;
-    cursor: pointer;
-    padding-right: 40px;  /* Space for the dropdown arrow */
-}
-/* Focus states for both input and select */
-.popup input:focus,
-.popup select:focus {
-    outline: none;
-    border-color: #3354F4;
-    box-shadow: 0 0 0 1px #3354F4;
-}
-
-/* Calendar input specific styles */
-.popup input[type="date"]::-webkit-calendar-picker-indicator {
-    cursor: pointer;
-    filter: invert(26%) sepia(89%) saturate(1583%) hue-rotate(223deg) brightness(98%) contrast(94%);
-}
-
+/* Popup Typography */
+/* Popup Typography */
 .popup h2 {
-    color: #727272;
-    margin-bottom: 24px;
-    font-size: 20px;
-    font-weight: 400;
-    font-family: "Lexend", sans-serif;
+  color: #727272;
+  margin-bottom: 24px;
+  font-size: 20px;
+  font-weight: 400;
+  font-family: "Lexend", sans-serif;
 }
 
 .popup h3 {
-    color: #727272;
-    margin-top: 24px;
-    margin-bottom: 8px;
-    font-size: 14px;
-    font-family: "Lexend", sans-serif;
+  color: #727272;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-family: "Lexend", sans-serif;
 }
 
-.dateSection {
-    margin: 24px 0;
+/* ADD NEW SECTIONS HERE IN THIS ORDER */
+
+/* Base styles for all input fields and select */
+.popup input,
+.popup select,
+.popup textarea {
+  width: 100%;
+  height: 44px;
+  padding: 12px;
+  margin-bottom: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  color: #727272;
+  font-family: "Lexend", sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  box-sizing: border-box;
 }
 
-/* ... existing styles ... */
+/* Select specific styles */
+.popup select {
+  padding-right: 45px;
+  color: #999;
+  background: url("data:image/svg+xml,<svg height='10px' width='10px' viewBox='0 0 16 16' fill='%23999999' xmlns='http://www.w3.org/2000/svg'><path d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/></svg>") no-repeat;
+  background-position: calc(100% - 20px) center;
+  background-color: white;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
 
+/* Date input specific styles */
+.popup input[type="date"] {
+  position: relative;
+  background-color: white;
+  cursor: pointer;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+}
+
+.popup input[type="date"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  right: 12px;
+  height: 16px;
+  width: 16px;
+  cursor: pointer;
+  opacity: 0.5;
+  filter: invert(26%) sepia(89%) saturate(1583%) hue-rotate(223deg) brightness(98%) contrast(94%);
+}
+
+.popup input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+/* Hide default date format */
+.popup input[type="date"]::-webkit-datetime-edit {
+  display: none;
+}
+
+/* Show formatted date or placeholder */
+.popup input[type="date"]::before {
+  content: attr(data-date);
+  color: #727272;
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.popup input[type="date"]:not([data-date])::before {
+  content: "dd month yyyy";
+  color: #999;
+}
+
+/* Show selected date when value exists */
+.popup input[type="date"].has-value::-webkit-datetime-edit {
+  opacity: 1;
+  color: #727272;
+}
+
+/* Placeholder color consistency */
+.popup input::placeholder {
+  color: #999;
+}
+
+/* Focus states */
+.popup input:focus,
+.popup select:focus {
+  outline: none;
+  border-color: #3354F4;
+}
+
+/* NEXT SECTION SHOULD BE Delete Popup Specific Styles */
+/* Delete Popup Specific Styles */
 .deletePopup {
-    min-width: 50px;
-    min-height: 40px;
-    display: flex;
-    flex-direction: column;
-    padding: 30px;
-    text-align: center;
-    box-shadow: 0 8px 28px rgba(72, 89, 102, 0.1);
+  min-width: 50px;
+  min-height: 40px;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 8px 28px rgba(72, 89, 102, 0.1);
+  border: 1px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+.deletePopup:hover {
+  border-color: #6aa5e4;
 }
 
 .deletePopup h2 {
-    color: #727272;
-    margin-bottom: 20px;
-    font-size: 22px;
-    font-weight: 400;
-    font-family: "Lexend", sans-serif;
-    width: 100%;        /* Added to ensure full width */
-    text-align: center; /* Explicitly center the heading */
-    position: relative; /* Added for better positioning */
+  color: #727272;
+  margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: 400;
+  font-family: "Lexend", sans-serif;
+  width: 100%;
+  text-align: center;
+  position: relative;
 }
+
+/* Delete Popup Action Buttons */
 .deleteActions {
-    display: flex;
-    justify-content: center;
-    gap: 50px;
-    margin-top: 24px;
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  margin-top: 24px;
 }
 
 .actionButton {
-    padding: 8px 32px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-family: "Lexend", sans-serif;
-    font-size: 14px;
-    border: 1px solid #3354F4;
-    transition: all 0.2s ease;
+  padding: 8px 32px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: "Lexend", sans-serif;
+  font-size: 14px;
+  border: 1px solid #3354F4;
+  transition: all 0.2s ease;
 }
 
 .noButton {
-    background-color: white;
-    color: #3354F4;
+  background-color: white;
+  color: #3354F4;
 }
 
 .noButton:hover {
-    background-color: #f5f7ff;
+  background-color: #f5f7ff;
 }
 
 .yesButton {
-    background-color: #3354F4;
-    color: white;
-    border: none;
+  background-color: #3354F4;
+  color: white;
+  border: none;
 }
 
 .yesButton:hover {
-    background-color: #2842c3;
+  background-color: #2842c3;
 }
 
-.popup h3:first-of-type {
-    margin-top: 0;
-}
-
-.popup input:last-of-type {
-    margin-bottom: 48px;
-}
-/* Add these new styles for the done button */
+/* Done Button Styles */
 .doneButton {
   position: absolute;
   right: 32px;
@@ -312,4 +349,16 @@
   background-color: #2842c3;
 }
 
-/* Rest of your existing CSS remains the same */
+/* Close Button Styles */
+.closeButton {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  background: none;
+  border: none;
+  font-size: 30px;
+  font-weight: 600;
+  color: #3354F4;
+  cursor: pointer;
+  padding: 4px;
+}

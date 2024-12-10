@@ -1,0 +1,7 @@
+/* create a env file 
+use    MONGODB_URI=mongodb+srv://<username>:<password>@<cluster-url>/<dbname>?retryWrites=true&w=majority
+
+for now i have    MONGODB_URI=mongodb+srv://gandalfinheels:A8ceFfblYjVRoeT6@<your-cluster-url>/test?retryWrites=true&w=majority
+
+install 'npm install mongoose dotenv'
+
