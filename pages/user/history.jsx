@@ -60,11 +60,46 @@ const History = () => {
     }));
   };
 
-  const handleApplyDateFilter = () => {
-    console.log('Filtering with dates:', dateFilters);
-    handleClosePopup();
-  };
+  const handleApplyDateFilter = async () => {
+    try {
+        if (!dateFilters.startDate || !dateFilters.endDate) {
+            setError('Please select both start and end dates');
+            return;
+        }
 
+        setIsLoading(true);
+        setError(null);
+
+        console.log('Sending dates:', dateFilters); // Debug log
+
+        const response = await axios.get(`${API_URL}/v1/calendar/filter-by-date`, {
+            params: {
+                startDate: dateFilters.startDate,
+                endDate: dateFilters.endDate
+            },
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        });
+
+        console.log('Response:', response.data); // Debug log
+
+        if (response.data.success) {
+            setHistoryData(response.data.data);
+            handleClosePopup();
+        } else {
+            throw new Error(response.data.message || 'Failed to fetch filtered data');
+        }
+
+    } catch (error) {
+        console.error('Error filtering dates:', error);
+        setError(error.response?.data?.message || error.message || 'Failed to filter dates');
+    } finally {
+        setIsLoading(false);
+    }
+};
+  
   // Existing checkBackendStatus
   const checkBackendStatus = useCallback(async () => {
     try {
