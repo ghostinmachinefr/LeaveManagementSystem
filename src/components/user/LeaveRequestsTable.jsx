@@ -92,7 +92,6 @@ const LeaveRequestsTable = ({ requests, onDeleteRequest }) => {
         <thead>
           <tr>
             <th>Request ID</th>
-            <th>Date Sent</th>
             <th>Type</th>
             <th>Leave Request Date From</th>
             <th>Leave Request Date To</th>
@@ -104,7 +103,6 @@ const LeaveRequestsTable = ({ requests, onDeleteRequest }) => {
           {sampleRequests.map((request) => (
             <tr key={request.id}>
               <td>{request.id}</td>
-              <td>{request.dateSent}</td>
               <td>{request.type}</td>
               <td>{request.fromDate}</td>
               <td>{request.toDate}</td>

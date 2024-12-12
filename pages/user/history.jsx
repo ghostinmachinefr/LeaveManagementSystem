@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'; // Add useCallback
+import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import TopNavBar from '@/components/TopNavBar';
 import SideNavBar from '@/components/user/SideNavBar';
@@ -19,7 +19,53 @@ const History = () => {
   const [error, setError] = useState(null);
   const [retryCount, setRetryCount] = useState(0);
 
-  // Wrap checkBackendStatus in useCallback
+  const [activePopup, setActivePopup] = useState(null);
+  const [searchFilters, setSearchFilters] = useState({
+    sapId: '',
+    startDate: '',
+    endDate: ''
+  });
+
+  // New state for date filters
+  const [dateFilters, setDateFilters] = useState({
+    startDate: '',
+    endDate: ''
+  });
+
+  const handleSearchClick = (popupType) => {
+    setActivePopup(popupType);
+  };
+
+  const handleClosePopup = () => {
+    setActivePopup(null);
+  };
+
+  const handleExport = () => {
+    console.log("Exporting to Excel...");
+  };
+
+  const handleApplySearch = (type, value) => {
+    setSearchFilters(prev => ({
+      ...prev,
+      ...value
+    }));
+    setActivePopup(null);
+  };
+
+  // New handlers for date filtering
+  const handleDateChange = (field, value) => {
+    setDateFilters(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+
+  const handleApplyDateFilter = () => {
+    console.log('Filtering with dates:', dateFilters);
+    handleClosePopup();
+  };
+
+  // Existing checkBackendStatus
   const checkBackendStatus = useCallback(async () => {
     try {
       const response = await axios.get(`${API_URL}/test`, { timeout: 5000 });
@@ -30,19 +76,17 @@ const History = () => {
     }
   }, []);
 
-  // Wrap fetchHistoryData in useCallback
+  // Existing fetchHistoryData
   const fetchHistoryData = useCallback(async () => {
     try {
       setIsLoading(true);
       setError(null);
 
-      // Check backend status
       const isBackendUp = await checkBackendStatus();
       if (!isBackendUp) {
         throw new Error('Cannot connect to server. Please check if the backend is running.');
       }
 
-      // Fetch data with axios
       const response = await axios.get(`${API_URL}${ENDPOINT}`, {
         timeout: 5000,
         headers: {
@@ -74,7 +118,6 @@ const History = () => {
 
       setError(errorMessage);
 
-      // Retry logic
       if (retryCount < 3) {
         const nextRetry = retryCount + 1;
         console.log(`Retrying... Attempt ${nextRetry} of 3`);
@@ -84,16 +127,14 @@ const History = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [checkBackendStatus, retryCount]); // Add dependencies
+  }, [checkBackendStatus, retryCount]);
 
-  // Manual retry handler with useCallback
   const handleRetry = useCallback(() => {
     setRetryCount(0);
     setError(null);
     fetchHistoryData();
   }, [fetchHistoryData]);
 
-  // Update useEffect to use the memoized function
   useEffect(() => {
     fetchHistoryData();
     
@@ -102,9 +143,50 @@ const History = () => {
       setIsLoading(false);
       setError(null);
     };
-  }, [fetchHistoryData]); // Add fetchHistoryData as dependency
+  }, [fetchHistoryData]);
 
-  // Loading state
+  // New calendar popup render function
+  const renderCalendarPopup = () => {
+    if (activePopup !== 'calendar') return null;
+
+    return (
+      <div className={styles.overlay}>
+        <div className={styles.popup}>
+          <button 
+            className={styles.closeButton}
+            onClick={handleClosePopup}
+          >
+            ×
+          </button>
+          <h2>Select Date Range</h2>
+          <div className={styles.dateSection}>
+            <h3>Start Date</h3>
+            <input
+              type="date"
+              value={dateFilters.startDate}
+              onChange={(e) => handleDateChange('startDate', e.target.value)}
+              className={styles.dateInput}
+            />
+            <h3>End Date</h3>
+            <input
+              type="date"
+              value={dateFilters.endDate}
+              onChange={(e) => handleDateChange('endDate', e.target.value)}
+              className={styles.dateInput}
+              min={dateFilters.startDate}
+            />
+          </div>
+          <button 
+            className={styles.doneButton}
+            onClick={handleApplyDateFilter}
+          >
+            Done
+          </button>
+        </div>
+      </div>
+    );
+  };
+
   if (isLoading) {
     return (
       <div className={styles.dashboard}>
@@ -125,7 +207,6 @@ const History = () => {
     );
   }
 
-  // Error state
   if (error) {
     return (
       <div className={styles.dashboard}>
@@ -160,7 +241,6 @@ const History = () => {
     );
   }
 
-  // Success state with data
   return (
     <div className={styles.dashboard}>
       <TopNavBar user={user} />
@@ -169,6 +249,19 @@ const History = () => {
         <main className={styles.mainContent}>
           <div className={styles.tableContainer}>
             <h1>Request History</h1>
+            <div className={styles.tableActions}>
+              <button className={styles.exportButton} onClick={handleExport}>
+                Export to Excel
+              </button>
+              <div className={styles.searchSection}>
+                <button 
+                  className={styles.searchButton} 
+                  onClick={() => handleSearchClick('calendar')}
+                >
+                  Calendar
+                </button>
+              </div>
+            </div>
             <table className={styles.historyTable}>
               <thead>
                 <tr>
@@ -202,6 +295,7 @@ const History = () => {
           </div>
         </main>
       </div>
+      {renderCalendarPopup()}
     </div>
   );
 };
