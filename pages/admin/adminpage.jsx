@@ -4,7 +4,7 @@ import TopNavBar from '../../src/components/TopNavBar';
 import SideNavBar from '../../src/components/admin/SideNavBar'; 
 import Card from '../../src/components/admin/Card';
 import { useRouter } from 'next/router';
-
+import { formatDate } from '@/utils/dateFormatter';
 
 const SCREEN2ADP = () => {
   const router = useRouter(); 

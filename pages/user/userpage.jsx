@@ -5,21 +5,8 @@ import SideNavBar from '@/components/user/SideNavBar';
 import LeaveCardsGrid from '@/components/user/LeaveCardGrid';
 import LeaveRequestsTable from '@/components/user/LeaveRequestsTable';
 import styles from '@/styles/user/userpage.module.css';
+import { formatDate } from '@/utils/dateFormatter';
 
-/**
- * Formats a date string into "dd month yyyy" format
- * @param {string} date - The date string to format
- * @returns {string} Formatted date string or empty string if no date
- */
-const formatDate = (date) => {
-  if (!date) return '';
-  const d = new Date(date);
-  return d.toLocaleDateString('en-GB', {
-    day: '2-digit',
-    month: 'long',
-    year: 'numeric'
-  });
-};
 
 /**
  * UserDashboard Component

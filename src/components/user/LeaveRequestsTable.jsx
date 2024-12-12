@@ -1,4 +1,5 @@
 import styles from '@/styles/user/LeaveRequestsTable.module.css'; 
+import { formatDate } from '@/utils/dateFormatter';
 
 const LeaveRequestsTable = ({ requests, onDeleteRequest }) => {
   const sampleRequests = [

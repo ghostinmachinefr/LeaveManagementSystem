@@ -5,3 +5,13 @@ for now i have    MONGODB_URI=mongodb+srv://gandalfinheels:A8ceFfblYjVRoeT6@<you
 
 install 'npm install mongoose dotenv'
 
+
+new 12/12/24- 7MInxKGiGW2TsAjr
+
+mongodb+srv://gandalfinheels:7MInxKGiGW2TsAjr@cluster0.30jj8.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+
+
+if you want to change the database MONGODB_URI=mongodb+srv://gandalfinheels:7MInxKGiGW2TsAjr@cluster0.30jj8.mongodb.net/leave_management?retryWrites=true&w=majority
+
+
+
