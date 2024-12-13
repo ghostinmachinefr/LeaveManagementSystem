@@ -8,6 +8,16 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
 const ENDPOINT = '/v1/history';
 
 const History = () => {
+  const formatFilteredDate = (dateString) => {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = months[date.getMonth()];
+    const year = date.getFullYear();
+    return `${day} ${month} ${year}`;
+  };
+
   const [user] = useState({
     name: "User",
     email: "user@domain.com",
@@ -60,17 +70,11 @@ const History = () => {
     }));
   };
 
+  // Update your handleApplyDateFilter function
   const handleApplyDateFilter = async () => {
     try {
-        if (!dateFilters.startDate || !dateFilters.endDate) {
-            setError('Please select both start and end dates');
-            return;
-        }
-
         setIsLoading(true);
         setError(null);
-
-        console.log('Sending dates:', dateFilters); // Debug log
 
         const response = await axios.get(`${API_URL}/v1/calendar/filter-by-date`, {
             params: {
@@ -83,23 +87,27 @@ const History = () => {
             }
         });
 
-        console.log('Response:', response.data); // Debug log
-
         if (response.data.success) {
-            setHistoryData(response.data.data);
-            handleClosePopup();
+            // Format the dates before setting the state
+            const formattedData = response.data.data.map(record => ({
+                ...record,
+                from: formatFilteredDate(record.from),
+                to: formatFilteredDate(record.to),
+                takenOn: formatFilteredDate(record.takenOn)
+            }));
+            setHistoryData(formattedData);
         } else {
             throw new Error(response.data.message || 'Failed to fetch filtered data');
         }
 
+        handleClosePopup();
     } catch (error) {
         console.error('Error filtering dates:', error);
-        setError(error.response?.data?.message || error.message || 'Failed to filter dates');
+        setError('Failed to filter dates: ' + error.message);
     } finally {
         setIsLoading(false);
     }
-};
-  
+  };  
   // Existing checkBackendStatus
   const checkBackendStatus = useCallback(async () => {
     try {
