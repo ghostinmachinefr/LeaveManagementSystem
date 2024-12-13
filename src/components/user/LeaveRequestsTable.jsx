@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import styles from '@/styles/user/LeaveRequestsTable.module.css';
 
@@ -9,13 +9,32 @@ const LeaveRequestsTable = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const fetchTodayRequests = async () => {
+    const formatDate = useCallback((dateString) => {
+        if (!dateString) return '';
+        const date = new Date(dateString);
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = months[date.getMonth()];
+        const year = date.getFullYear();
+        return `${day} ${month} ${year}`;
+    }, []);
+
+    const fetchTodayRequests = useCallback(async () => {
         try {
             setIsLoading(true);
             const response = await axios.get(`${API_URL}/v1/userpage/today-requests`);
             
             if (response.data.success) {
-                setRequests(response.data.data);
+                const formattedRequests = response.data.data.map(request => ({
+                    ...request,
+                    from: formatDate(request.from),
+                    to: formatDate(request.to),
+                    takenOn: formatDate(request.takenOn),
+                    type: request.type === 'Compensatory Off' ? 'Comp Off' : 
+                          request.type === 'Restricted Holiday' ? 'RH' : 
+                          request.type
+                }));
+                setRequests(formattedRequests);
             } else {
                 throw new Error(response.data.message);
             }
@@ -25,14 +44,25 @@ const LeaveRequestsTable = () => {
         } finally {
             setIsLoading(false);
         }
-    };
+    }, [formatDate]);
 
     useEffect(() => {
         fetchTodayRequests();
-    }, []);
+    }, [fetchTodayRequests]);
 
-    const handleCancel = (requestId) => {
-        setRequests(requests.filter(request => request.ID !== requestId));
+    const handleCancel = async (requestId) => {
+        try {
+            const response = await axios.put(`${API_URL}/v1/leave/cancel/${requestId}`, {
+                cancel: "1"
+            });
+            
+            if (response.data.success) {
+                setRequests(requests.filter(request => request.ID !== requestId));
+            }
+        } catch (error) {
+            console.error('Error canceling request:', error);
+            // You might want to show an error message to the user here
+        }
     };
 
     if (isLoading) {
@@ -74,9 +104,9 @@ const LeaveRequestsTable = () => {
                                 <tr key={request.ID}>
                                     <td>{request.ID}</td>
                                     <td>{request.type}</td>
-                                    <td>{new Date(request.from).toLocaleDateString()}</td>
-                                    <td>{new Date(request.to).toLocaleDateString()}</td>
-                                    <td>{new Date(request.takenOn).toLocaleDateString()}</td>
+                                    <td>{formatDate(request.from)}</td>
+                                    <td>{formatDate(request.to)}</td>
+                                    <td>{formatDate(request.takenOn)}</td>
                                     <td>
                                         <button 
                                             className={styles.deleteButton}

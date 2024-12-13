@@ -6,13 +6,25 @@ import LeaveCardsGrid from '@/components/user/LeaveCardGrid';
 import LeaveRequestsTable from '@/components/user/LeaveRequestsTable';
 import styles from '@/styles/user/userpage.module.css';
 import { formatDate } from '@/utils/dateFormatter';
-
+import axios from 'axios';
+import { API_URL } from '@/config/config';
+import api from '@/utils/axios';
 
 /**
  * UserDashboard Component
  * Manages the main dashboard interface for users to view and request leaves
  */
 const UserDashboard = () => {
+  const formatDate = (dateString) => {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = months[date.getMonth()];
+    const year = date.getFullYear();
+    return `${day} ${month} ${year}`;
+  };
+
   // State for user information
   const [user] = useState({
     name: "User",
@@ -58,10 +70,10 @@ const UserDashboard = () => {
   const [leaveRequests] = useState([
     {
       id: 'REQ001',
-      dateSent: '15 March 2024',
+      dateSent: formatDate('2024-03-15'),
       type: 'Full Leave',
-      fromDate: '20 March 2024',
-      toDate: '21 March 2024'
+      fromDate: formatDate('2024-03-20'),
+      toDate: formatDate('2024-03-21')
     }
   ]);
 
@@ -103,10 +115,27 @@ const UserDashboard = () => {
     });
   };
 
-  const handleSubmitLeave = () => {
+  const handleSubmitLeave = async () => {
     if (isFormValid()) {
-      console.log('Leave Request:', leaveRequest);
-      handleClosePopup();
+        try {
+            const response = await api.post('/v1/leave/request', {
+                type: leaveRequest.type,
+                startDate: leaveRequest.startDate,
+                endDate: leaveRequest.endDate,
+                reason: leaveRequest.reason
+            });
+
+            if (response.data.success) {
+                // Refresh the table data
+                if (typeof window !== 'undefined') {
+                    window.location.reload();
+                }
+                handleClosePopup();
+            }
+        } catch (error) {
+            console.error('Error submitting leave request:', error);
+            // You might want to show an error message to the user here
+        }
     }
   };
 
@@ -177,8 +206,8 @@ const UserDashboard = () => {
                   <option value="">Select Leave Type</option>
                   <option value="Half Day">Half Day</option>
                   <option value="Full Day">Full Day</option>
-                  <option value="Compensatory Off">Compensatory Off</option>
-                  <option value="Restricted Holiday">Restricted Holiday</option>
+                  <option value="Compensatory Off">Comp Off</option>
+                  <option value="RH">RH</option>
                 </select>
 
                 {/* Date Selection Fields */}
