@@ -8,8 +8,8 @@ const TopNavBar = ({ user }) => {
   const router = useRouter();
 
   const handleSignOut = () => {
-    setShowDropdown(false); // Close dropdown
-    router.push('/login'); // Redirect to main login page
+    setShowDropdown(false);
+    router.push('/login');
   };
 
   const handleHclLogoClick = useCallback(() => {
@@ -40,12 +40,12 @@ const TopNavBar = ({ user }) => {
         alt="Separator"
         src="/separator.svg"
       />
-      <div className={styles.adminContainer}>
-        <button 
-          className={styles.admindetails} 
-          id="loginDetails"
-          onClick={() => setShowDropdown(!showDropdown)}
-        >
+      <div 
+        className={styles.adminContainer}
+        onMouseEnter={() => setShowDropdown(true)}
+        onMouseLeave={() => setShowDropdown(false)}
+      >
+        <div className={styles.admindetails}>
           <Image
             className={styles.profileImage}
             width={35}
@@ -57,7 +57,7 @@ const TopNavBar = ({ user }) => {
             <p className={styles.p}>{user.name}</p>
             <p className={styles.p}>{user.email}</p>
           </div>
-        </button>
+        </div>
         
         {showDropdown && (
           <div className={styles.dropdown}>

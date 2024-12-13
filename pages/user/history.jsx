@@ -3,6 +3,7 @@ import axios from 'axios';
 import TopNavBar from '@/components/TopNavBar';
 import SideNavBar from '@/components/user/SideNavBar';
 import styles from '@/styles/user/history.module.css';
+import { exportToExcel } from '@/utils/Exportexcel';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
 const ENDPOINT = '/v1/history';
@@ -51,7 +52,16 @@ const History = () => {
   };
 
   const handleExport = () => {
-    console.log("Exporting to Excel...");
+    try {
+        if (!historyData || historyData.length === 0) {
+            alert('No data available to export');
+            return;
+        }
+        exportToExcel(historyData, 'leave_history');
+    } catch (error) {
+        console.error('Export failed:', error);
+        alert('Failed to export data. Please try again.');
+    }
   };
 
   const handleApplySearch = (type, value) => {
@@ -72,6 +82,12 @@ const History = () => {
 
   // Update your handleApplyDateFilter function
   const handleApplyDateFilter = async () => {
+    // Add validation
+    if (!dateFilters.startDate || !dateFilters.endDate) {
+        alert('Please select both start and end dates');
+        return;
+    }
+
     try {
         setIsLoading(true);
         setError(null);
@@ -88,7 +104,6 @@ const History = () => {
         });
 
         if (response.data.success) {
-            // Format the dates before setting the state
             const formattedData = response.data.data.map(record => ({
                 ...record,
                 from: formatFilteredDate(record.from),
@@ -193,40 +208,41 @@ const History = () => {
     if (activePopup !== 'calendar') return null;
 
     return (
-      <div className={styles.overlay}>
-        <div className={styles.popup}>
-          <button 
-            className={styles.closeButton}
-            onClick={handleClosePopup}
-          >
-            ×
-          </button>
-          <h2>Select Date Range</h2>
-          <div className={styles.dateSection}>
-            <h3>Start Date</h3>
-            <input
-              type="date"
-              value={dateFilters.startDate}
-              onChange={(e) => handleDateChange('startDate', e.target.value)}
-              className={styles.dateInput}
-            />
-            <h3>End Date</h3>
-            <input
-              type="date"
-              value={dateFilters.endDate}
-              onChange={(e) => handleDateChange('endDate', e.target.value)}
-              className={styles.dateInput}
-              min={dateFilters.startDate}
-            />
-          </div>
-          <button 
-            className={styles.doneButton}
-            onClick={handleApplyDateFilter}
-          >
-            Done
-          </button>
+        <div className={styles.overlay}>
+            <div className={styles.popup}>
+                <button 
+                    className={styles.closeButton}
+                    onClick={handleClosePopup}
+                >
+                    ×
+                </button>
+                <h2>Select Date Range</h2>
+                <div className={styles.dateSection}>
+                    <h3>Start Date</h3>
+                    <input
+                        type="date"
+                        value={dateFilters.startDate}
+                        onChange={(e) => handleDateChange('startDate', e.target.value)}
+                        className={styles.dateInput}
+                    />
+                    <h3>End Date</h3>
+                    <input
+                        type="date"
+                        value={dateFilters.endDate}
+                        onChange={(e) => handleDateChange('endDate', e.target.value)}
+                        className={styles.dateInput}
+                        min={dateFilters.startDate}
+                    />
+                </div>
+                <button 
+                    className={`${styles.doneButton} ${(!dateFilters.startDate || !dateFilters.endDate) ? styles.disabled : ''}`}
+                    onClick={handleApplyDateFilter}
+                    disabled={!dateFilters.startDate || !dateFilters.endDate}
+                >
+                    Done
+                </button>
+            </div>
         </div>
-      </div>
     );
   };
 
