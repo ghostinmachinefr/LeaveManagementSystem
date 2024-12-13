@@ -5,6 +5,7 @@ const cors = require("cors")
 const historyRouter = require("./apis/user/routes/history")
 const leaveRouter = require("./apis/user/routes/leave")
 const calanderRoutes = require("./apis/user/routes/calendar")
+const userpageTableRoutes = require('./apis/user/routes/userpageTable');
 dotenv.config()
 
 const app = express()
@@ -36,6 +37,7 @@ app.get("/",(req,res)=>{
 app.use("/v1/history",historyRouter)
 app.use("/v1/leave",leaveRouter)
 app.use('/v1/calendar', calanderRoutes);
+app.use('/v1/userpage', userpageTableRoutes);
 
 // Add this middleware to log all requests
 app.use((req, res, next) => {
