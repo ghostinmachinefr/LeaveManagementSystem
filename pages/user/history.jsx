@@ -4,6 +4,7 @@ import TopNavBar from '@/components/TopNavBar';
 import SideNavBar from '@/components/user/SideNavBar';
 import styles from '@/styles/user/history.module.css';
 import { exportToExcel } from '@/utils/Exportexcel';
+import Pagination from '@/components/user/Pagination'; // Adjust the path as necessary
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
 const ENDPOINT = '/v1/history';
@@ -42,6 +43,10 @@ const History = () => {
     startDate: '',
     endDate: ''
   });
+
+  // New state for pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10; // Adjust as needed
 
   const handleSearchClick = (popupType) => {
     setActivePopup(popupType);
@@ -246,6 +251,16 @@ const History = () => {
     );
   };
 
+  // Calculate the current items to display based on the current page
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = historyData.slice(indexOfFirstItem, indexOfLastItem);
+
+  // Function to handle page change
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   if (isLoading) {
     return (
       <div className={styles.dashboard}>
@@ -332,8 +347,8 @@ const History = () => {
                 </tr>
               </thead>
               <tbody>
-                {historyData && historyData.length > 0 ? (
-                  historyData.map((record, index) => (
+                {currentItems && currentItems.length > 0 ? (
+                  currentItems.map((record, index) => (
                     <tr key={index}>
                       <td>{record.ID}</td>
                       <td>{record.type}</td>
@@ -351,6 +366,11 @@ const History = () => {
                 )}
               </tbody>
             </table>
+            <Pagination 
+              currentPage={currentPage} 
+              totalPages={Math.ceil(historyData.length / itemsPerPage)} 
+              onPageChange={handlePageChange} 
+            />
           </div>
         </main>
       </div>
