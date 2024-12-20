@@ -14,6 +14,10 @@
     border-color: #6aa5e4;
 }
 
+.card.overLimit:hover {
+    border-color: #dc3545;
+}
+
 .cardTitle {
     margin: 0;
     font-size: 20px;
@@ -117,4 +121,18 @@
     fill: none;
     stroke: #F0F0F0;
     stroke-width: 8;
+}
+
+.overLimit .circleProgress,
+.card[data-remaining="negative"] .circleProgress {
+    stroke: #d03e4c;
+}
+
+.overLimit .progressText,
+.card[data-remaining="negative"] .progressText {
+    color: #de959d;
+}
+
+.card[data-remaining="negative"]:hover {
+    border-color: #de959d;
 }

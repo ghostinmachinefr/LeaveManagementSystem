@@ -65,4 +65,4 @@ const LeaveCardsGrid = () => {
   );
 };
 
-export default LeaveCardsGrid;
+export default LeaveCardsGrid; 

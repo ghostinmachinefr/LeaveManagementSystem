@@ -1,5 +1,5 @@
 // Import necessary dependencies
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import TopNavBar from '@/components/TopNavBar';
 import SideNavBar from '@/components/user/SideNavBar';
 import LeaveCardsGrid from '@/components/user/LeaveCardGrid';
@@ -138,6 +138,18 @@ const UserDashboard = () => {
         }
     }
   };
+
+  useEffect(() => {
+    // Debug code to check localStorage
+    const sapId = localStorage.getItem('sapId');
+    console.log('Current SAPID in localStorage:', sapId);
+    
+    // If no SAPID, you might want to set a temporary one for testing
+    if (!sapId) {
+        console.log('Setting temporary SAPID for testing');
+        localStorage.setItem('sapId', '29137562'); // Use a valid SAPID from your database
+    }
+  }, []);
 
   // Render Component
   return (
