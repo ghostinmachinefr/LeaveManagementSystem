@@ -2,11 +2,7 @@ require('dotenv').config()
 const express = require("express")
 const mongoose = require("mongoose")
 const cors = require("cors")
-const historyRouter = require("./apis/user/routes/history")
-const leaveRouter = require("./apis/user/routes/leave")
-const calanderRoutes = require("./apis/user/routes/calendar")
-const userpageTableRoutes = require('./apis/user/routes/userpageTable');
-const leaveCardRoutes = require('./apis/user/routes/leaveCard');
+const userRoutes = require("../../pages/api/apiuser/routes");
 
 const app = express()
 
@@ -14,6 +10,7 @@ app.use(cors({
     origin: ["http://localhost:3001", "http://localhost:3000"],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Accept"],
+    credentials: true,
     optionsSuccessStatus: 200
 }))
 
@@ -41,12 +38,8 @@ app.get("/",(req,res)=>{
     res.send("hello world")
 })
 
-// Your existing routes
-app.use("/v1/history",historyRouter)
-app.use("/v1/leave",leaveRouter)
-app.use('/v1/calendar', calanderRoutes);
-app.use('/v1/userpage', userpageTableRoutes);
-app.use('/v1/leaveCard', leaveCardRoutes);
+// Replace all individual route uses with single userRoutes
+app.use("/v1", userRoutes);
 
 // Add this middleware to log all requests
 app.use((req, res, next) => {

@@ -65,7 +65,7 @@ async function importLeaveRequests(csvFilePath) {
 }
 
 // Execute the import
-importLeaveRequests('./server/database/request.csv')
+importLeaveRequests('./src/server/database/request.csv')
     .then(() => {
         console.log('Import process completed');
         process.exit(0);
