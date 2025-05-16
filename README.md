@@ -3,7 +3,7 @@ This guide provides a step-by-step process to set up the Leave Management System
 dependency installation, environment configuration, database setup, and application execution in both
 development and production environments.
 
-Table of Contents
+Table of Contents are here
 
 1. Prerequisites
 Ensure you have the following installed and configured:
